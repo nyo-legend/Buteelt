@@ -8,23 +8,23 @@ public class LinkedListExample {
         list.add(5);
         list.add(10);
         int sum = add(list);
-        System.out.println("Sum of elements: " + sum);
+        System.out.println("Нийлбэр: " + sum);
 
         // Functionality 2: Subtraction
         int difference = subtract(list);
-        System.out.println("Difference of elements: " + difference);
+        System.out.println("Ялгавар: " + difference);
 
         // Functionality 3: Multiplication
         int product = multiply(list);
-        System.out.println("Product of elements: " + product);
+        System.out.println("Үржигдэхүүн: " + product);
 
         // Functionality 4: Division
         double quotient = divide(list);
-        System.out.println("Quotient of elements: " + quotient);
+        System.out.println("Хуваах: " + quotient);
 
         // Functionality 5: Finding the Greater of Two Numbers
         int greater = findGreater(list);
-        System.out.println("Greater of two numbers: " + greater);
+        System.out.println("Аль нь их вэ: " + greater);
 
         // Functionality 6: Display the Linked List
         displayList(list);
@@ -39,14 +39,19 @@ public class LinkedListExample {
         return sum;
     }
 
-    // Functionality 2: Subtraction
+ // Functionality 2: Subtraction
     public static int subtract(LinkedList<Integer> list) {
-        int difference = 0;
-        for (int num : list) {
-            difference -= num;
+        // Initialize the difference with the first element
+        int difference = list.isEmpty() ? 0 : list.get(0);
+
+        // Subtract the remaining elements
+        for (int i = 1; i < list.size(); i++) {
+            difference -= list.get(i);
         }
+
         return difference;
     }
+
 
     // Functionality 3: Multiplication
     public static int multiply(LinkedList<Integer> list) {
@@ -78,6 +83,6 @@ public class LinkedListExample {
 
     // Functionality 6: Display the Linked List
     public static void displayList(LinkedList<Integer> list) {
-        System.out.println("Linked List elements: " + list);
+        System.out.println("Оруулсан элемент: " + list);
     }
 }
