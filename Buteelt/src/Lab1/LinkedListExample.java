@@ -83,6 +83,6 @@ public class LinkedListExample {
 
     // Functionality 6: Display the Linked List
     public static void displayList(LinkedList<Integer> list) {
-        System.out.println("Оруулсан элемент: " + list);
+        System.out.println("Оруулсан элемент: " + list); //Алдаа шалгах
     }
 }
