@@ -12,7 +12,7 @@ public class LinkedListExample {
 
         // Functionality 2: Subtraction
         int difference = subtract(list);
-        System.out.println("Ялгавар: " + difference);
+        System.out.println("Minus: " + difference);
 
         // Functionality 3: Multiplication
         int product = multiply(list);
