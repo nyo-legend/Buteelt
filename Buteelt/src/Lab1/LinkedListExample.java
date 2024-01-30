@@ -5,8 +5,8 @@ public class LinkedListExample {
     public static void main(String[] args) {
         // Functionality 1: Addition
         LinkedList<Integer> list = new LinkedList<>();
-        list.add(5);
-        list.add(10);
+        list.add(7);
+        list.add(35);
         int sum = add(list);
         System.out.println("Нийлбэр: " + sum);
 
@@ -62,14 +62,31 @@ public class LinkedListExample {
         return product;
     }
 
-    // Functionality 4: Division
+ // Functionality 4: Division
     public static double divide(LinkedList<Integer> list) {
-        double quotient = 1.0;
-        for (int num : list) {
-            quotient /= num;
+        if (list.isEmpty()) {
+            throw new IllegalArgumentException("List should not be empty for division");
         }
+
+        double quotient = list.get(0);
+
+        // Avoid division by zero
+        if (quotient == 0) {
+            throw new ArithmeticException("Cannot divide by zero");
+        }
+
+        // Divide the remaining elements
+        for (int i = 1; i < list.size(); i++) {
+            // Avoid division by zero
+            if (list.get(i) == 0) {
+                throw new ArithmeticException("Cannot divide by zero");
+            }
+            quotient /= list.get(i);
+        }
+
         return quotient;
     }
+
 
     // Functionality 5: Finding the Greater of Two Numbers
     public static int findGreater(LinkedList<Integer> list) {
