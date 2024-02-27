@@ -16,18 +16,15 @@ public class LinkedListExample<T, G> {
         scanner = new Scanner(System.in);
     }
 
-    // Method to add an item to the library inventory
     public void addItem(T item) {
         availableItems.add(item);
     }
 
-    // Method to remove an item from the library inventory
     public void removeItem(T item) {
         availableItems.remove(item);
         bookedItems.remove(item);
     }
 
-    // Method to book an item from the library
     public void bookItem(T item) {
         if (availableItems.contains(item)) {
             availableItems.remove(item);
@@ -38,7 +35,6 @@ public class LinkedListExample<T, G> {
         }
     }
 
-    // Method to return a booked item to the library
     public void returnItem(G item) {
         if (bookedItems.contains(item)) {
             bookedItems.remove(item);
@@ -49,7 +45,6 @@ public class LinkedListExample<T, G> {
         }
     }
 
-    // Method to display available items in the library
     public void displayAvailableItems() {
         System.out.println("Байгаа номнууд:");
         for (T item : availableItems) {
@@ -57,7 +52,6 @@ public class LinkedListExample<T, G> {
         }
     }
 
-    // Method to display booked items in the library
     public void displayBookedItems() {
         System.out.println("Түрээслэгдсэн номнууд:");
         for (G item : bookedItems) {
@@ -65,7 +59,6 @@ public class LinkedListExample<T, G> {
         }
     }
 
-    // Method to display the menu
     public void displayMenu() {
         System.out.println("\nЦэс:");
         System.out.println("1. Ном нэмэх");
