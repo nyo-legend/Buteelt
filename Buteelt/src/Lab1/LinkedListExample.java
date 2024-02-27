@@ -1,105 +1,119 @@
 package Lab1;
-import java.util.LinkedList;
 
-public class LinkedListExample {
-    public static void main(String[] args) {
-        // Functionality 1: Addition
-        LinkedList<Integer> list = new LinkedList<>();
-        list.add(7);
-        list.add(35);
-        int sum = add(list);
-        System.out.println("Нийлбэр: " + sum);
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
-        // Functionality 2: Subtraction
-        int difference = subtract(list);
-        System.out.println("Minus: " + difference);
+public class LinkedListExample<T, G> {
 
-        // Functionality 3: Multiplication
-        int product = multiply(list);
-        System.out.println("Үржигдэхүүн: " + product);
+    private List<T> availableItems;
+    private List<G> bookedItems;
+    private Scanner scanner;
 
-        // Functionality 4: Division
-        double quotient = divide(list);
-        System.out.println("Хуваах: " + quotient);
-
-        // Functionality 5: Finding the Greater of Two Numbers
-        int greater = findGreater(list);
-        System.out.println("Аль нь их вэ: " + greater);
-
-        // Functionality 6: Display the Linked List
-        displayList(list);
+    public LinkedListExample() {
+        availableItems = new ArrayList<>();
+        bookedItems = new ArrayList<>();
+        scanner = new Scanner(System.in);
     }
 
-    // Functionality 1: Addition
-    public static int add(LinkedList<Integer> list) {
-        int sum = 0;
-        for (int num : list) {
-            sum += num;
-        }
-        return sum;
+    // Method to add an item to the library inventory
+    public void addItem(T item) {
+        availableItems.add(item);
     }
 
- // Functionality 2: Subtraction
-    public static int subtract(LinkedList<Integer> list) {
-        // Initialize the difference with the first element
-        int difference = list.isEmpty() ? 0 : list.get(0);
-
-        // Subtract the remaining elements
-        for (int i = 1; i < list.size(); i++) {
-            difference -= list.get(i);
-        }
-
-        return difference;
+    // Method to remove an item from the library inventory
+    public void removeItem(T item) {
+        availableItems.remove(item);
+        bookedItems.remove(item);
     }
 
-
-    // Functionality 3: Multiplication
-    public static int multiply(LinkedList<Integer> list) {
-        int product = 1;
-        for (int num : list) {
-            product *= num;
+    // Method to book an item from the library
+    public void bookItem(T item) {
+        if (availableItems.contains(item)) {
+            availableItems.remove(item);
+            bookedItems.add((G)item);
+            System.out.println("Ном амжилттай түрээслэгдлээ: " + item.toString());
+        } else {
+            System.out.println("Ном түрээслэх боломжгүй: " + item.toString());
         }
-        return product;
     }
 
- // Functionality 4: Division
-    public static double divide(LinkedList<Integer> list) {
-        if (list.isEmpty()) {
-            throw new IllegalArgumentException("List should not be empty for division");
+    // Method to return a booked item to the library
+    public void returnItem(G item) {
+        if (bookedItems.contains(item)) {
+            bookedItems.remove(item);
+            availableItems.add((T)item);
+            System.out.println("Ном буцаагдлаа: " + item.toString());
+        } else {
+            System.out.println("Ном олдсонгүй: " + item.toString());
         }
+    }
 
-        double quotient = list.get(0);
-
-        // Avoid division by zero
-        if (quotient == 0) {
-            throw new ArithmeticException("Cannot divide by zero");
+    // Method to display available items in the library
+    public void displayAvailableItems() {
+        System.out.println("Байгаа номнууд:");
+        for (T item : availableItems) {
+            System.out.println(item.toString());
         }
+    }
 
-        // Divide the remaining elements
-        for (int i = 1; i < list.size(); i++) {
-            // Avoid division by zero
-            if (list.get(i) == 0) {
-                throw new ArithmeticException("Cannot divide by zero");
+    // Method to display booked items in the library
+    public void displayBookedItems() {
+        System.out.println("Түрээслэгдсэн номнууд:");
+        for (G item : bookedItems) {
+            System.out.println(item.toString());
+        }
+    }
+
+    // Method to display the menu
+    public void displayMenu() {
+        System.out.println("\nЦэс:");
+        System.out.println("1. Ном нэмэх");
+        System.out.println("2. Ном түрээслэх");
+        System.out.println("3. Ном буцаах");
+        System.out.println("4. Боломжит номнуудаа харах");
+        System.out.println("5. Түрээслэгдсэн ном харах");
+        System.out.println("6. Гарах");
+        System.out.print("Сонголтоо оруул: ");
+    }
+
+    public void run() {
+        int choice;
+        do {
+            displayMenu();
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline character
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Нэмэх номоо оруулна уу: ");
+                    addItem((T) scanner.nextLine());
+                    break;
+                case 2:
+                    System.out.print("Түрээслэх номоо оруулна уу: ");
+                    bookItem((T) scanner.nextLine());
+                    break;
+                case 3:
+                    System.out.print("Буцаах номны нэрийг оруулна уу: ");
+                    returnItem((G) scanner.nextLine());
+                    break;
+                case 4:
+                    displayAvailableItems();
+                    break;
+                case 5:
+                    displayBookedItems();
+                    break;
+                case 6:
+                    System.out.println("........");
+                    break;
+                default:
+                    System.out.println("1-6 хооронд тоо оруулна уу");
             }
-            quotient /= list.get(i);
-        }
-
-        return quotient;
+        } while (choice != 6);
     }
 
-
-    // Functionality 5: Finding the Greater of Two Numbers
-    public static int findGreater(LinkedList<Integer> list) {
-        if (list.size() < 2) {
-            throw new IllegalArgumentException("List should have at least two elements");
-        }
-        int num1 = list.get(0);
-        int num2 = list.get(1);
-        return Math.max(num1, num2);
-    }
-
-    // Functionality 6: Display the Linked List
-    public static void displayList(LinkedList<Integer> list) {
-        System.out.println("Оруулсан элемент: " + list); //Алдаа шалгах
+    public static void main(String[] args) {
+        LinkedListExample<String, Integer> library = new LinkedListExample<>();
+        library.run();
     }
 }
