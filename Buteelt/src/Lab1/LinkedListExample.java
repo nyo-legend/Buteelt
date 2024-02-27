@@ -104,7 +104,7 @@ public class LinkedListExample<T, G> {
             }
         } while (choice != 6);
     }
-
+//5 21
     public static void main(String[] args) {
         LinkedListExample<String, Integer> library = new LinkedListExample<>();
         library.run();
